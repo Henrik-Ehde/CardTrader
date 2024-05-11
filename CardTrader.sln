@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "CardTrader.client", "CardTrader.client\CardTrader.client.esproj", "{CD2E465D-2DAC-44E2-BCA1-23E1411892FC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardTrader.Server", "CardTrader.Server\CardTrader.Server.csproj", "{8FEBE637-5CC0-4C91-8C7F-C1F82F7FF1F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD2E465D-2DAC-44E2-BCA1-23E1411892FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD2E465D-2DAC-44E2-BCA1-23E1411892FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD2E465D-2DAC-44E2-BCA1-23E1411892FC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CD2E465D-2DAC-44E2-BCA1-23E1411892FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD2E465D-2DAC-44E2-BCA1-23E1411892FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD2E465D-2DAC-44E2-BCA1-23E1411892FC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8FEBE637-5CC0-4C91-8C7F-C1F82F7FF1F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FEBE637-5CC0-4C91-8C7F-C1F82F7FF1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FEBE637-5CC0-4C91-8C7F-C1F82F7FF1F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FEBE637-5CC0-4C91-8C7F-C1F82F7FF1F2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0A0E6E7D-6100-4384-B00F-9B087B9A9C69}
+	EndGlobalSection
+EndGlobal

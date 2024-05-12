@@ -1,4 +1,5 @@
 using CardTrader.Server.Data;
+using CardTrader.Server.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -16,7 +17,7 @@ namespace CardTrader.Server
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
             builder.Services.AddAuthorization();
-            builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
+            builder.Services.AddIdentityApiEndpoints<User>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             // Add services to the container.
@@ -30,9 +31,9 @@ namespace CardTrader.Server
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            app.MapIdentityApi<ApplicationUser>();
+            app.MapIdentityApi<User>();
 
-            app.MapPost("/logout", async (SignInManager<ApplicationUser> signInManager) =>
+            app.MapPost("/logout", async (SignInManager<User> signInManager) =>
             {
 
                 await signInManager.SignOutAsync();

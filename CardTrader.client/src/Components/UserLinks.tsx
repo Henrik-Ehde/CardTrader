@@ -24,7 +24,7 @@ function UserLinks() {
     return (
         <>
             {loggedIn ? < span >
-                <LogoutLink /*setter={/setloggedIn}*/ >User Page </LogoutLink>
+                <button> User Page </button>
                 <LogoutLink /*setter={/setloggedIn}*/ >Logout </LogoutLink></span >
 
                 : <span>

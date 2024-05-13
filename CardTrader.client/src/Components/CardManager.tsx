@@ -8,6 +8,8 @@ interface Card {
     text: string;
 }
 
+
+
 function CardManager() {
     const [cards, setCards] = useState<Card[]>();
 

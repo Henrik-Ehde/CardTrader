@@ -25,14 +25,14 @@ namespace CardTrader.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Card>>> GetCards()
         {
-            return await _context.Cards.ToListAsync();
+            return await _context.Cards.Include(c => c.Listings).ThenInclude(l => l.User).ToListAsync();
         }
 
         // GET: api/Cards/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Card>> GetCard(int id)
         {
-            var card = await _context.Cards.FindAsync(id);
+            var card = await _context.Cards.Include(c => c.Listings).ThenInclude(l => l.User).FirstAsync(c => c.Id == id);
 
             if (card == null)
             {

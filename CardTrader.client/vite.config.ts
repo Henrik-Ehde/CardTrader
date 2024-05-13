@@ -54,6 +54,10 @@ export default defineConfig({
                 target: 'https://localhost:7249/',
                 secure: false
             },
+            '^/listings': {
+                target: 'https://localhost:7249/',
+                secure: false
+            },
             '^/pingauth': {
                 target: 'https://localhost:7249/',
                 secure: false

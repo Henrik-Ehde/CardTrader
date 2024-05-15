@@ -1,5 +1,6 @@
 //import React from 'react';
 import { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
 
 interface Card {
     id: number;
@@ -20,15 +21,16 @@ interface Listing {
 interface User {
     userName: string;
 }
-function CardListings({ cardId }: { cardId: number }) {
-    const [card, setCard] = useState<Card[]>();
+function CardListings() {
+    const [card, setCard] = useState<Card>();
+    const { cardId } = useParams();
 
     useEffect(() => {
         GetCard(cardId);
-    }, []);
+    }, [cardId]);
 
     const contents = card === undefined
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
+        ? <p><em>Loading card {cardId}</em></p>
         : <div>
 
             <table className="table table-striped" aria-labelledby="tabelLabel">
@@ -71,10 +73,19 @@ function CardListings({ cardId }: { cardId: number }) {
       </div>
     );
 
-    async function GetCard(cardId: number) {
-        const response = await fetch('cards/' + cardId);
+    async function GetCard(cardId: string) {
+        console.log('fetching cards/' + cardId);
+        const response = await fetch('/cards/' + cardId);
+
+        //For Debugging
+        //console.log('awaiting data')
+        //const dataText = await response.text();
+        //console.log(dataText);
+   
         const data = await response.json();
         setCard(data);
+        console.log('Setting Cards')
+
     }
 }
 

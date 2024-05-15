@@ -20,27 +20,24 @@ function AddCard() {
 
     // handle change events for input fields
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        if (name === "title") setTitle(value);
-        if (name === "text") setText(value);
+        const { value } = e.target;
+        setTitle(value);
     };
 
     const handleTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        if (name === "title") setTitle(value);
-        if (name === "text") setText(value);
+        const { value } = e.target;
+        setText(value);
     };
 
     // handle submit event for the form
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // validate email and passwords
         if (!title || !text) {
             setError("Please fill in all fields.");
         } else {
             // clear error message
             setError("");
-            // post data to the /register api
+            // post data
             fetch("/cards", {
                 method: "POST",
                 headers: {

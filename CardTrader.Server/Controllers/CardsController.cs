@@ -21,15 +21,42 @@ namespace CardTrader.Server.Controllers
             _context = context;
         }
 
-        // GET: api/Cards
+        //GET: Cards
+       //[HttpGet]
+       // public async Task<ActionResult<IEnumerable<Card>>> GetCards()
+       // {
+       //     return await _context.Cards.Include(c => c.Listings).ThenInclude(l => l.User).ToListAsync();
+       // }
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Card>>> GetCards()
+        public async Task<ActionResult<IEnumerable<CardDTO>>> GetCardDTOs()
         {
-            return await _context.Cards.Include(c => c.Listings).ThenInclude(l => l.User).ToListAsync();
+            await Console.Out.WriteLineAsync("MEOW");
+            List<CardDTO> DTOList = new List<CardDTO>();
+            //var cards = await _context.Cards.Include(c => c.Listings).ThenInclude(l => l.User).ToListAsync();
+            //return cards;
+            var cards = await _context.Cards.Include(c => c.Listings).ThenInclude(l => l.User).ToListAsync();
+            foreach (Card card in cards)
+            {
+                DTOList.Add(new CardDTO()
+                {
+                    Id = card.Id,
+                    Title = card.Title,
+                    Text = card.Text,
+                    Listings = card.Listings,
+                    NumberOfListings = card.Listings.Count,
+                    NumberOfCards = card.Listings.Sum(l => l.Quantity),
+                    //bestPrice = card.Listings.DefaultIfEmpty().Min(l => l.Price)
+                    BestPrice = card.Listings.Select(l => l.Price).DefaultIfEmpty().Min()
+                }) ;
+            }
+
+            return Ok(DTOList);
         }
 
         // GET: api/Cards/5
         [HttpGet("{id}")]
+        [Produces("application/json")]
         public async Task<ActionResult<Card>> GetCard(int id)
         {
             var card = await _context.Cards.Include(c => c.Listings).ThenInclude(l => l.User).FirstAsync(c => c.Id == id);
@@ -76,8 +103,13 @@ namespace CardTrader.Server.Controllers
         // POST: api/Cards
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Card>> PostCard(Card card)
+        public async Task<ActionResult<Card>> PostCard(PostCardDTO dto)
         {
+            Card card = new Card
+            {
+                Title = dto.Title,
+                Text = dto.Text
+            };
             _context.Cards.Add(card);
             await _context.SaveChangesAsync();
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CardTrader.Server.Data;
 using CardTrader.Server.Models;
+using CardTrader.Server.Models.DTOs;
 
 namespace CardTrader.Server.Controllers
 {
@@ -76,7 +77,7 @@ namespace CardTrader.Server.Controllers
         // POST: api/Listings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Listing>> PostListing(int cardId, int quantity, decimal price, string userId, DateOnly datePosted)
+        public async Task<ActionResult<Listing>> PostListing(PostListingDTO dto)
         {
             //var card = await _context.Cards.FirstOrDefaultAsync(c => c.Id == listing.CardId);
             //if (card == null)
@@ -84,13 +85,14 @@ namespace CardTrader.Server.Controllers
             //    return BadRequest();
             //}
             //listing.Card = card;
+            var User = await _context.Users.FirstAsync(x => x.Email == dto.UserEmail);
 
             Listing listing = new Listing();
-            listing.CardId = cardId;
-            listing.Quantity = quantity;
-            listing.Price = price;
-            listing.UserId = userId;
-            listing.DatePosted = datePosted;
+            listing.CardId = dto.CardId;
+            listing.Quantity = dto.Quantity;
+            listing.Price = dto.Price;
+            listing.UserId = User.Id;
+            listing.DatePosted = DateOnly.FromDateTime(DateTime.Now);
 
             _context.Listings.Add(listing);
             await _context.SaveChangesAsync();

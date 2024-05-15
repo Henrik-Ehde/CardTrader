@@ -9,6 +9,8 @@ import Header from './Components/Header.tsx';
 import CardListings from './Pages/CardListings.tsx';
 import Listings from './Components/Listings.tsx';
 import CardManager from './Components/CardManager.tsx';
+import AddListing from './Pages/AddListing.tsx';
+import AuthorizeView from './Components/AuthorizeView.tsx';
 
 
 function App() {
@@ -25,7 +27,8 @@ function App() {
                     <Route path="/addCard" element={<AddCard />} />
                     <Route path="/Card/:cardId" element={<CardListings />} />
                     <Route path="/Cards" element={<CardManager />} />
-                    <Route path="/Listings" element={<Listings />} />                   
+                    <Route path="/Listings" element={<Listings />} />
+                    <Route path="/AddListing" element={<AuthorizeView> <AddListing /> </AuthorizeView>} />                   
 
                     <Route path="/" element={<Home />} />
                     

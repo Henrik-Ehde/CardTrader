@@ -1,4 +1,4 @@
-﻿namespace CardTrader.Server.Models
+﻿namespace CardTrader.Server.Models.DTOs
 {
     public class PostCardDTO
     {

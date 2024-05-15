@@ -1,6 +1,6 @@
 //import React from 'react';
 import { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface Card {
     id: number;
@@ -25,6 +25,11 @@ function CardListings() {
     const [card, setCard] = useState<Card>();
     const { cardId } = useParams();
 
+    const navigate = useNavigate();
+    const handleAddListingClick = () => {
+        navigate("/addListing");
+    }
+
     useEffect(() => {
         GetCard(cardId);
     }, [cardId]);
@@ -32,7 +37,7 @@ function CardListings() {
     const contents = card === undefined
         ? <p><em>Loading card {cardId}</em></p>
         : <div>
-
+            <button onClick={handleAddListingClick}>Add Listing</button>
             <table className="table table-striped" aria-labelledby="tabelLabel">
                 <tbody>
                         <tr>

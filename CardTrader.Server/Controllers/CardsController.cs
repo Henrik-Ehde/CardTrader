@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CardTrader.Server.Data;
 using CardTrader.Server.Models;
+using CardTrader.Server.Models.DTOs;
 
 namespace CardTrader.Server.Controllers
 {

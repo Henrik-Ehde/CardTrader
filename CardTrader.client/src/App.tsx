@@ -11,6 +11,8 @@ import Listings from './Components/Listings.tsx';
 import CardManager from './Components/CardManager.tsx';
 import AddListing from './Pages/AddListing.tsx';
 import AuthorizeView from './Components/AuthorizeView.tsx';
+import DeleteCard from './Pages/DeleteCard.tsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
@@ -26,6 +28,7 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/addCard" element={<AddCard />} />
                     <Route path="/Card/:cardId" element={<CardListings />} />
+                    <Route path="/DeleteCard/:cardId" element={<DeleteCard />} />
                     <Route path="/Cards" element={<CardManager />} />
                     <Route path="/Listings" element={<Listings />} />
                     <Route path="/AddListing" element={<AuthorizeView> <AddListing /> </AuthorizeView>} />                   

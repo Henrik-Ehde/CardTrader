@@ -1,7 +1,6 @@
 //import React from 'react';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from "react-router-dom";
-import CardDetails from '../Components/CardDetails';
+import { useParams } from "react-router-dom";
 
 interface Card {
     id: number;
@@ -22,14 +21,9 @@ interface Listing {
 interface User {
     userName: string;
 }
-function CardListings() {
+function CardDetails() {
     const [card, setCard] = useState<Card>();
     const { cardId } = useParams();
-
-    const navigate = useNavigate();
-    const handleAddListingClick = () => {
-        navigate("/addListing");
-    }
 
     useEffect(() => {
         GetCard(cardId);
@@ -38,30 +32,22 @@ function CardListings() {
     const contents = card === undefined
         ? <p><em>Loading card {cardId}</em></p>
         : <div>
-            <h2>Listings</h2>
-            <button onClick={handleAddListingClick}>Add Listing</button>
             <table className="table table-striped" aria-labelledby="tabelLabel">
-                <thead>
-                    <tr>
-                        <th>Seller</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                    </tr>
-                </thead>
                 <tbody>
-                    {card.listings.map(listing =>
-                        <tr key={listing.id}>
-                            <td>{listing.user.userName}</td>
-                            <td>{listing.price}</td>
-                            <td>{listing.quantity}</td>
-                        </tr>
-                    )}
+                        <tr>
+                        <td><strong>Title</strong></td>
+                        <td>{card.title}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Text</strong></td>
+                        <td>{card.text}</td>
+                    </tr>                  
                 </tbody>
             </table>
         </div>
   return (
       <div>
-          <CardDetails />
+          <h2 id="tabelLabel">Card Details</h2>
           {contents}
       </div>
     );
@@ -82,4 +68,4 @@ function CardListings() {
     }
 }
 
-export default CardListings;
+export default CardDetails;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import '../App.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 interface Card {
     id: number;
@@ -34,10 +35,11 @@ function CardManager() {
                     </tr>
                 </thead>
                 <tbody>
-                    {cards.map(cards =>
-                        <tr key={cards.id}>
-                            <td>{cards.title}</td>
-                            <td>{cards.text}</td>
+                    {cards.map(card =>
+                        <tr key={card.id}>
+                            <td>{card.title}</td>
+                            <td>{card.text}</td>
+                            <td> <Link to={`/DeleteCard/${card.id}`}> <Button variant="warning"> Delete</Button> </Link> </td>
                         </tr>
                     )}
                 </tbody>

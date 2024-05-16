@@ -16,6 +16,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import EditCard from './Pages/EditCard.tsx';
 import DeleteListing from './Pages/DeleteListing.tsx';
 import EditListing from './Pages/EditListing.tsx';
+import UserListings from './Pages/UserListings.tsx';
 
 
 function App() {
@@ -42,6 +43,8 @@ function App() {
                     <Route path="/AddListing" element={<AuthorizeView> <AddListing /> </AuthorizeView>} />   
                     <Route path="/DeleteListing/:listingId" element={<DeleteListing />} />
                     <Route path="/EditListing/:listingId" element={<EditListing />} />
+
+                    <Route path="/UserListings/:userId" element={<UserListings />} />
 
                     <Route path="/" element={<Home />} />
                     

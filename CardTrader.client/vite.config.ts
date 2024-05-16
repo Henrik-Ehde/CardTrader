@@ -58,6 +58,10 @@ export default defineConfig({
                 target: 'https://localhost:7249/',
                 secure: false
             },
+            '^/users': {
+                target: 'https://localhost:7249/',
+                secure: false
+            },
             '^/pingauth': {
                 target: 'https://localhost:7249/',
                 secure: false

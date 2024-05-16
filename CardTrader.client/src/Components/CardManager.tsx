@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import '../App.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import ReturnButton from './ReturnButton';
 
 interface Card {
     id: number;
@@ -37,7 +38,7 @@ function CardManager() {
                 <tbody>
                     {cards.map(card =>
                         <tr key={card.id}>
-                            <td>{card.title}</td>
+                            <td> <a href={`/Card/${card.id}`}> {card.title} </a></td>
                             <td>{card.text}</td>
                             <td> <Link to={`/EditCard/${card.id}`}> <Button variant="info"> Edit</Button> </Link> </td>
                             <td> <Link to={`/DeleteCard/${card.id}`}> <Button variant="warning"> Delete</Button> </Link> </td>
@@ -52,6 +53,7 @@ function CardManager() {
         <div>
             <h1 id="tabelLabel">Cards</h1>
             {contents}
+            <ReturnButton />
         </div>
     );
 

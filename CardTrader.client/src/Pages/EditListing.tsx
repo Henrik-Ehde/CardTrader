@@ -1,7 +1,7 @@
-import { AuthorizedEmail, AuthorizedUser } from "../Components/AuthorizeView.tsx";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import ReturnButton from "../Components/ReturnButton.tsx";
+import { AuthorizedEmail } from "../Components/AuthorizeView";
+import ReturnButton from "../Components/ReturnButton";
 import { Button } from "react-bootstrap";
 
 interface Card {
@@ -9,16 +9,52 @@ interface Card {
     title: string;
 }
 
-function AddListing() {
+interface Listing {
+    id: number;
+    cardId: number;
+    card: Card;
+    price: number;
+    quantity: number;
+    user: User;
+    datePosted: Date;
+}
+
+interface User {
+    name: string;
+    email: string;
+}
+
+function EditListing() {
+    const [listing, setListing] = useState<Listing>();
+    const { listingId } = useParams();
+
     const { initialId } = useParams();
     const [cardId, setCardId] = useState(initialId);
     const [quantity, setQuantity] = useState(1);
     const [price, setPrice] = useState(1);
-    const email = AuthorizedEmail();
+    const navigate = useNavigate();
+    //const email = AuthorizedEmail();
+    const [email, setEmail] = useState("")
 
     // state variable for error messages
     const [error, setError] = useState("");
 
+    const goBack = () => {
+        navigate(-1);
+    };
+
+    useEffect(() => {
+        GetListing(listingId);
+    }, [listingId]);
+
+    useEffect(() => {
+        if (listing != undefined) {
+            setCardId(listing.cardId);
+            setPrice(listing.price)
+            setQuantity(listing.quantity)
+            setEmail(listing.user.email)
+        }
+    }, [listing]);
 
     const [cards, setCards] = useState<Card[]>();
 
@@ -27,7 +63,7 @@ function AddListing() {
         }, []);
 
 
-    const contents = cards === undefined
+    const cardOptions = cards === undefined
         ? <option>loading...</option>
         : <>
             {cards.map(card =>
@@ -41,8 +77,6 @@ function AddListing() {
                 </option>
             )}
         </>;
-
-
 
 
 
@@ -78,8 +112,8 @@ function AddListing() {
             }))
 
             // post data
-            fetch("/listings", {
-                method: "POST",
+            fetch("/listings/" + listingId, {
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -94,10 +128,13 @@ function AddListing() {
                 .then((data) => {
                     // handle success or error from the server
                     console.log(data);
-                    if (data.ok)
-                        setError("Card Successfully added.");
+                    if (data.ok) {
+                        setError("Listing successfully edited.");
+                        setTimeout(() => { goBack() }, 800);
+                    }
+
                     else
-                        setError("Error adding card.");
+                        setError("Error editing listing.");
 
                 })
                 .catch((error) => {
@@ -108,13 +145,9 @@ function AddListing() {
         }
     };
 
-    return (
-        <div className="containerbox">
-            <h3>Add Listing</h3>
-{/*            <h4> <AuthorizedUser value="email" /> </h4>*/}
-
-
-
+    const contents = listing === undefined
+        ? <p><em>Loading card {cardId}</em></p>
+        : <div>
             <form onSubmit={handleSubmit}>
 
 
@@ -126,7 +159,7 @@ function AddListing() {
                         value={cardId}
                         onChange={e => setCardId(e.target.value)}
                     >
-                        {contents}
+                        {cardOptions}
                     </select>
                 </div>
                 <div>
@@ -158,13 +191,20 @@ function AddListing() {
                     />
                 </div>
 
-                <div> <Button variant="success" type="submit"> Add Listing</Button> </div>
-                <div> <ReturnButton /></div>
+                <div>
+                    <Button variant="info" type="submit"> Edit Listing</Button>
 
+                </div>
             </form>
 
             {error && <p className="error">{error}</p>}
-            
+          </div>
+
+    return (
+        <div className="containerbox">
+            <h3>Edit Listing</h3>
+            {contents}
+            <ReturnButton />
         </div>
     );
 
@@ -173,6 +213,21 @@ function AddListing() {
         const data = await response.json();
         setCards(data);
     }
+
+    async function GetListing(listingId: string) {
+        console.log('fetching Listings/' + listingId);
+        const response = await fetch('/listings/' + listingId);
+
+        /*        For Debugging*/
+        //console.log('awaiting data')
+        //const dataText = await response.text();
+        //console.log(dataText);
+
+        const data = await response.json();
+        setListing(data);
+        console.log('Setting Listings')
+
+    }
 }
 
-export default AddListing;
+export default EditListing;

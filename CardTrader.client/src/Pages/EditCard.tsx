@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import ReturnButton from "../Components/ReturnButton";
+import { Button } from "react-bootstrap";
 
 interface Card {
     id: number;
@@ -118,11 +120,11 @@ function EditCard() {
                     />
                 </div>
                 <div>
-                    <button type="submit">Edit Card</button>
+                    <Button variant="info" type="submit"> Edit Card</Button>
 
                 </div>
                 <div>
-                    <button onClick={goBack}>Return</button>
+                    <ReturnButton />
                 </div>
             </form>
 

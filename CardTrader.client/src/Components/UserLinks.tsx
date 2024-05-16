@@ -29,7 +29,7 @@ function UserLinks() {
 
                 : <span>
                     <button onClick={handleRegisterClick}>Register</button>
-                    <button onClick={handleLoginClick}>Go to Login</button>
+                    <button onClick={handleLoginClick}>Login</button>
                     </span>
                 
             }

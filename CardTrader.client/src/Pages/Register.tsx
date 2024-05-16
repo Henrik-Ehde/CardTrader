@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ReturnButton from "../Components/ReturnButton";
 
 
 function Register() {
@@ -127,6 +128,9 @@ function Register() {
                 </div>
                 <div>
                     <button onClick={handleLoginClick}>Go to Login</button>
+                </div>
+                <div>
+                    <ReturnButton />
                 </div>
             </form>
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import CardDetails from '../Components/CardDetails';
 import Button from 'react-bootstrap/Button';
+import ReturnButton from '../Components/ReturnButton';
 
 //interface Card {
 //    id: number;
@@ -11,8 +12,8 @@ import Button from 'react-bootstrap/Button';
 function DeleteCard() {
     const { cardId } = useParams();
     const [error, setError] = useState<string>("");
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
     const goBack = () => {
         navigate(-1);
     };
@@ -54,8 +55,7 @@ function DeleteCard() {
           <br />
           <span>
               <Button variant="danger" onClick={handleDeleteClick}> Delete</Button>{' '}
-
-              <button onClick={goBack}>Return</button>
+              <ReturnButton />
           </span>
           {error && <p className="error">{error}</p>}
       </div>

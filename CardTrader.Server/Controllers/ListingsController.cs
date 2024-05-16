@@ -46,12 +46,20 @@ namespace CardTrader.Server.Controllers
         // PUT: api/Listings/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutListing(int id, Listing listing)
+        public async Task<IActionResult> PutListing(int id, PostListingDTO dto)
         {
+            var listing = await _context.Listings.Include(x => x.Card).Include(x => x.User).FirstAsync(x => x.Id == id);
+
             if (id != listing.Id)
             {
                 return BadRequest();
             }
+
+            listing.CardId = dto.CardId;
+            listing.Quantity = dto.Quantity;
+            listing.Price = dto.Price;
+            var User = await _context.Users.FirstAsync(x => x.Email == dto.UserEmail);
+            listing.DatePosted = DateOnly.FromDateTime(DateTime.Now);
 
             _context.Entry(listing).State = EntityState.Modified;
 

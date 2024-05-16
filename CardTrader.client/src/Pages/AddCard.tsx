@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ReturnButton from "../Components/ReturnButton";
+import { Button } from "react-bootstrap";
 
 
 function AddCard() {
@@ -93,11 +95,10 @@ function AddCard() {
                     />
                 </div>
                 <div>
-                    <button type="submit">Add Card</button>
-
+                    <Button variant="success" type="submit"> Add Card</Button>
                 </div>
                 <div>
-                    <button onClick={handleReturnClick}>Return</button>
+                    <ReturnButton />
                 </div>
             </form>
 

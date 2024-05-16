@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ReturnButton from "../Components/ReturnButton";
 
 function Login() {
     // state variables for email and passwords
@@ -110,12 +111,9 @@ function Login() {
                         checked={rememberme}
                         onChange={handleChange} /><span>Remember Me</span>
                 </div>
-                <div>
-                    <button type="submit">Login</button>
-                </div>
-                <div>
-                    <button onClick={handleRegisterClick}>Register</button>
-                </div>
+                <div> <button type="submit">Login</button> </div>
+                <div> <button onClick={handleRegisterClick}>Register</button> </div>
+                <div> <ReturnButton /> </div>
             </form>
             {error && <p className="error">{error}</p>}
         </div>

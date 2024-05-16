@@ -1,7 +1,9 @@
 //import React from 'react';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from "react-router-dom";
 import CardDetails from '../Components/CardDetails';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import ReturnButton from '../Components/ReturnButton';
 
 interface Card {
     id: number;
@@ -20,7 +22,7 @@ interface Listing {
 }
 
 interface User {
-    userName: string;
+    name: string;
 }
 function CardListings() {
     const [card, setCard] = useState<Card>();
@@ -51,9 +53,11 @@ function CardListings() {
                 <tbody>
                     {card.listings.map(listing =>
                         <tr key={listing.id}>
-                            <td>{listing.user.userName}</td>
+                            <td>{listing.user.name}</td>
                             <td>{listing.price}</td>
                             <td>{listing.quantity}</td>
+                            <td> <Link to={`/EditListing/${listing.id}`}> <Button variant="info"> Edit</Button> </Link> </td>
+                            <td> <Link to={`/DeleteListing/${listing.id}`}> <Button variant="warning"> Delete</Button> </Link> </td>
                         </tr>
                     )}
                 </tbody>
@@ -63,6 +67,7 @@ function CardListings() {
       <div>
           <CardDetails />
           {contents}
+          <ReturnButton />
       </div>
     );
 

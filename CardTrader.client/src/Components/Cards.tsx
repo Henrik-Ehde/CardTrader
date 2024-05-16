@@ -51,7 +51,6 @@ function Cards() {
                     {cards.map(card =>
                         <tr key={card.id}>
                             <td> <a href={`/Card/${card.id}`}> {card.title} </a></td>
-{/*                         <td><button onClick={handleCardClick}>{card.title}</button></td>*/}
                             <td>{card.numberOfListings}</td>
                             <td>{card.numberOfCards}</td>
                             <td>{card.bestPrice}</td>

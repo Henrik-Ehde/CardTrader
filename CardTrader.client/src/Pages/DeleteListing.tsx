@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ListingDetails from '../Components/ListingDetails';
 import Button from 'react-bootstrap/Button';
+import ReturnButton from '../Components/ReturnButton';
 
 //interface Listing {
 //    id: number;
@@ -55,7 +56,8 @@ function DeleteListing() {
           <span>
               <Button variant="danger" onClick={handleDeleteClick}> Delete</Button>{' '}
 
-              <button onClick={goBack}>Return</button>
+{/*              <button onClick={goBack}>Return</button>*/}
+              <ReturnButton />
           </span>
           {error && <p className="error">{error}</p>}
       </div>

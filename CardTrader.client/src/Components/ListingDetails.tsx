@@ -19,7 +19,7 @@ interface Listing {
 }
 
 interface User {
-    userName: string;
+    name: string;
 }
 function ListingDetails() {
     const [listing, setListing] = useState<Listing>();

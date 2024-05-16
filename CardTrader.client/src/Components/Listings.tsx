@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import '../App.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 
 interface Listing {
@@ -18,7 +19,7 @@ interface Card {
 }
 
 interface User {
-    userName: string
+    name: string
 }
 
 function Listings() {
@@ -48,13 +49,15 @@ function Listings() {
                     </tr>
                 </thead>
                 <tbody>
-                    {listings.map(listings =>
-                        <tr key={listings.id}>
-                            <td>{listings.card.title}</td>
-                            <td>{listings.price}</td>
-                            <td>{listings.quantity}</td>
-                            <td>{listings.user.userName}</td>
-                            <td>{listings.datePosted.toString()}</td>
+                    {listings.map(listing =>
+                        <tr key={listing.id}>
+                            <td>{listing.card.title}</td>
+                            <td>{listing.price}</td>
+                            <td>{listing.quantity}</td>
+                            <td>{listing.user.name}</td>
+                            <td>{listing.datePosted.toString()}</td>
+                            <td> <Link to={`/EditListing/${listing.id}`}> <Button variant="info"> Edit</Button> </Link> </td>
+                            <td> <Link to={`/DeleteListing/${listing.id}`}> <Button variant="warning"> Delete</Button> </Link> </td>
                         </tr>
                     )}
                 </tbody>

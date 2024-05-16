@@ -5,6 +5,7 @@ const UserContext = createContext({});
 
 interface User {
     email: string;
+    name: string;
 }
 
 
@@ -40,7 +41,7 @@ export function LoggedIn() {
                 if (response.status == 200) {
                     console.log("Authorized");
                     let j: any = await response.json();
-                    setUser({ email: j.email });
+                    setUser({ email: j.email, name:j.name });
                     setAuthorized(true);
                     return response; // return the response
                 } else if (response.status == 401) {
@@ -88,21 +89,18 @@ export function LoggedIn() {
     }
     else {
         if (authorized && !loading) {
-            return true;
+            return user;
         } else {
-            return false;
+            return null;
         }
     }
 
 }
 
-export function AuthorizedUser(props: { value: string }) {
+export function AuthorizedName() {
     // Consume the username from the UserContext
     const user: any = React.useContext(UserContext);
 
-    // Display the username in a h1 tag
-    if (props.value == "email")
-        return <>{user.email}</>;
-    else
-        return <></>
+        return user.name
+
 }

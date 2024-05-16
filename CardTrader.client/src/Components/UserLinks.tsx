@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import LogoutLink from "../Components/LogoutLink.tsx";
 import { LoggedIn } from "../Components/LoggedInUser.tsx";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function UserLinks() {
     const navigate = useNavigate();
@@ -23,11 +23,13 @@ function UserLinks() {
 
     return (
         <>
-            {loggedIn ? < span >
+            {loggedIn != null ? < span >
                 {/*<button> User Page </button>*/}
+                <> <Link to={`/MyListings`}> <button> My Listings</button> </Link> </>
                 <LogoutLink /*setter={/setloggedIn}*/ >Logout </LogoutLink></span >
 
                 : <span>
+                    
                     <button onClick={handleRegisterClick}>Register</button>
                     <button onClick={handleLoginClick}>Login</button>
                     </span>

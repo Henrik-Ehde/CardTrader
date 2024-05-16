@@ -4,6 +4,8 @@ import CardDetails from '../Components/CardDetails';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import ReturnButton from '../Components/ReturnButton';
+import { AuthorizedName } from '../Components/LoggedInUser';
+import { LoggedIn } from '../Components/LoggedInUser';
 
 interface Card {
     id: number;
@@ -27,6 +29,8 @@ interface User {
 function CardListings() {
     const [card, setCard] = useState<Card>();
     const { cardId } = useParams();
+
+    const loggedInUser = LoggedIn();
 
     const navigate = useNavigate();
     const handleAddListingClick = () => {
@@ -53,11 +57,36 @@ function CardListings() {
                 <tbody>
                     {card.listings.map(listing =>
                         <tr key={listing.id}>
-                            <td> <a href={`/UserListings/${listing.user.name}`}> {listing.user.name} </a></td>
+                            <td> <a href={`/BuyFromUser/${listing.user.name}`}> {listing.user.name} </a></td>
                             <td>{listing.price}</td>
                             <td>{listing.quantity}</td>
-                            <td> <Link to={`/EditListing/${listing.id}`}> <Button variant="info"> Edit</Button> </Link> </td>
-                            <td> <Link to={`/DeleteListing/${listing.id}`}> <Button variant="warning"> Delete</Button> </Link> </td>
+                            {loggedInUser != null ?
+                                loggedInUser.name == listing.user.name ?
+
+                                    <td>
+                                        <> <Link to={`/EditListing/${listing.id}`}> <Button variant="info"> Edit</Button> </Link> </>
+                                        <> <Link to={`/DeleteListing/${listing.id}`}> <Button variant="warning"> Delete</Button> </Link> </>
+                                    </td>
+                                    : <td> <Link to={`/BuyFromUser/${listing.user.name}`}> <Button variant="success"> Buy Cards</Button> </Link> </td>
+
+                                : <td> <Link to={`/Login`}> <Button variant="outline-secondary"> Login to trade</Button> </Link> </td>
+
+                            }
+
+
+
+{/*                            {loggedInUser.name == listing.user.name ?*/}
+{/*/*                           {loggedInUser != null ?*/}
+{/*                                <  >*/}
+
+{/*                                </>*/}
+
+{/*                                : <>*/}
+
+{/*                                </>*/}
+{/*                            }                            */}
+                            
+
                         </tr>
                     )}
                 </tbody>

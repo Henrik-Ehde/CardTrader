@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import ReturnButton from '../Components/ReturnButton';
+import { LoggedIn } from '../Components/LoggedInUser';
 
 interface Card {
     id: number;
@@ -18,6 +19,7 @@ interface Listing {
     quantity: number;
     user: User;
     datePosted: Date;
+    buyQuantity: number;
 }
 
 interface User {
@@ -25,8 +27,8 @@ interface User {
     listings: Listing[]
 }
 function UserListings() {
-    const [user, setUser] = useState<User>();
-    const { userId } = useParams();
+    const [user, setUser] = useState();
+    const loggedInUser = LoggedIn();
 
     const navigate = useNavigate();
     const handleAddListingClick = () => {
@@ -34,13 +36,16 @@ function UserListings() {
     }
 
     useEffect(() => {
-        GetUser(userId);
-    }, [userId]);
+        if (loggedInUser.name != undefined) {
+            GetUser(loggedInUser.name);
+        }
+
+    }, [loggedInUser]);
 
     const contents = user === undefined
-        ? <p><em>Loading listings for user {userId}</em></p>
+        ? <p><em>Loading your listings</em></p>
         : <div>
-            <h2>{user.name}'s Listings</h2>
+            <h2>Your Listings</h2>
             <button onClick={handleAddListingClick}>Add Listing</button>
             <table className="table table-striped" aria-labelledby="tabelLabel">
                 <thead>
@@ -53,7 +58,7 @@ function UserListings() {
                 <tbody>
                     {user.listings.map(listing =>
                         <tr key={listing.id}>
-                            <td>{listing.card.title}</td>
+                            <td> <a href={`/Card/${listing.card.id}`}> {listing.card.title} </a></td>
                             <td>{listing.price}</td>
                             <td>{listing.quantity}</td>
                             <td> <Link to={`/EditListing/${listing.id}`}> <Button variant="info"> Edit</Button> </Link> </td>
@@ -70,9 +75,8 @@ function UserListings() {
       </div>
     );
 
-    async function GetUser(userId: string) {
-        console.log('fetching User/' + userId);
-        const response = await fetch('/users/' + userId);
+    async function GetUser(userName: string) {
+        const response = await fetch('/users/' + userName);
 
 ///*        For Debugging*/
 //        console.log('awaiting data')

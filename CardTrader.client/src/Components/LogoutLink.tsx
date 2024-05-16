@@ -1,8 +1,10 @@
 
 //import { LoggedIn } from "./LoggedInUser";
 
-function LogoutLink(props: { /* setter: Dispatch<boolean>, */ children: React.ReactNode }) {
+import { useNavigate } from "react-router-dom";
 
+function LogoutLink(props: { /* setter: Dispatch<boolean>, */ children: React.ReactNode }) {
+    const navigate = useNavigate();
 
     const handleSubmit = (e: React.FormEvent<HTMLAnchorElement>) => {
         e.preventDefault();
@@ -18,7 +20,7 @@ function LogoutLink(props: { /* setter: Dispatch<boolean>, */ children: React.Re
                 if (data.ok) {
 
                     //navigate("/login");
-                    window.location.reload();
+                    navigate(0);
                     //props.setter(false)
                 }
                 else { }

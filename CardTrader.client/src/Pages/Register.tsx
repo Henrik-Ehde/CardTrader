@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Register() {
     // state variables for email and passwords
     const [email, setEmail] = useState("");
+    const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const navigate = useNavigate();
@@ -21,6 +22,11 @@ function Register() {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         if (name === "email") setEmail(value);
+        if (name === "userName") {
+            setUserName(value);
+            setEmail(value + "@cardtrader.com");
+        }
+
         if (name === "password") setPassword(value);
         if (name === "confirmPassword") setConfirmPassword(value);
     };
@@ -76,10 +82,22 @@ function Register() {
                     <label htmlFor="email">Email:</label>
                 </div><div>
                     <input
+                        disabled={true}
                         type="email"
                         id="email"
                         name="email"
                         value={email}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="userName">User Name:</label>
+                </div><div>
+                    <input
+                        type="text"
+                        id="userName"
+                        name="userName"
+                        value={userName}
                         onChange={handleChange}
                     />
                 </div>

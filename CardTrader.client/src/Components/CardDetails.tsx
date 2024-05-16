@@ -45,6 +45,7 @@ function CardDetails() {
                 </tbody>
             </table>
         </div>
+
   return (
       <div>
           <h2 id="tabelLabel">Card Details</h2>

@@ -32,10 +32,7 @@ namespace CardTrader.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CardDTO>>> GetCardDTOs()
         {
-            await Console.Out.WriteLineAsync("MEOW");
-            List<CardDTO> DTOList = new List<CardDTO>();
-            //var cards = await _context.Cards.Include(c => c.Listings).ThenInclude(l => l.User).ToListAsync();
-            //return cards;
+            List<CardDTO> DTOList = new List<CardDTO>();;
             var cards = await _context.Cards.Include(c => c.Listings).ThenInclude(l => l.User).ToListAsync();
             foreach (Card card in cards)
             {
@@ -55,7 +52,7 @@ namespace CardTrader.Server.Controllers
             return Ok(DTOList);
         }
 
-        // GET: api/Cards/5
+        // GET: Cards/5
         [HttpGet("{id}")]
         [Produces("application/json")]
         public async Task<ActionResult<Card>> GetCard(int id)
@@ -73,12 +70,17 @@ namespace CardTrader.Server.Controllers
         // PUT: api/Cards/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCard(int id, Card card)
+        public async Task<IActionResult> PutCard(int id, PostCardDTO dto)
         {
+            var card = await _context.Cards.Include(c => c.Listings).ThenInclude(l => l.User).FirstAsync(c => c.Id == id);
+
             if (id != card.Id)
             {
                 return BadRequest();
             }
+
+            card.Title = dto.Title;
+            card.Text = dto.Text;
 
             _context.Entry(card).State = EntityState.Modified;
 

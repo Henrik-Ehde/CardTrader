@@ -1,12 +1,17 @@
 import { AuthorizedEmail, AuthorizedUser } from "../Components/AuthorizeView.tsx";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
+interface Card {
+    id: number;
+    title: string;
+}
 
 function AddListing() {
-    // state variables for email and passwords
-    const [cardId, setCardId] = useState("");
-    const [quantity, setQuantity] = useState("");
-    const [price, setPrice] = useState("");
+    const { initialId } = useParams();
+    const [cardId, setCardId] = useState(initialId);
+    const [quantity, setQuantity] = useState(1);
+    const [price, setPrice] = useState(1);
     const navigate = useNavigate();
     const email = AuthorizedEmail();
 
@@ -16,6 +21,30 @@ function AddListing() {
     const handleReturnClick = () => {
         navigate("/");
     }
+
+    const [cards, setCards] = useState<Card[]>();
+
+        useEffect(() => {
+            GetCards();
+        }, []);
+
+
+    const contents = cards === undefined
+        ? <option>loading...</option>
+        : <>
+            {cards.map(card =>
+                <option
+                    key={card.id}
+                    value={card.id}
+
+                >{card.title}
+
+
+                </option>
+            )}
+        </>;
+
+
 
 
 
@@ -27,6 +56,11 @@ function AddListing() {
         if (name === "quantity") setQuantity(value);
         if (name === "price") setPrice(value);
     };
+
+    //const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    //    const {value } = e.target;
+    //    setCardId(value);
+    //};
 
     // handle submit event for the form
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -78,21 +112,24 @@ function AddListing() {
 
     return (
         <div className="containerbox">
-            <h3>Add Card</h3>
-            <h4> <AuthorizedUser value="email" /> </h4>
+            <h3>Add Listing</h3>
+{/*            <h4> <AuthorizedUser value="email" /> </h4>*/}
+
+
 
             <form onSubmit={handleSubmit}>
+
+
                 <div>
-                    <label htmlFor="cardId">cardId:</label>
+                    <label htmlFor="Card">Card:</label>
                 </div>
                 <div>
-                    <input
-                        type="text"
-                        id="cardId"
-                        name="cardId"
+                    <select name="cardId"
                         value={cardId}
-                        onChange={handleChange}
-                    />
+                        onChange={e => setCardId(e.target.value)}
+                    >
+                        {contents}
+                    </select>
                 </div>
                 <div>
                     <label htmlFor="quantity">Quantity:</label>
@@ -100,6 +137,7 @@ function AddListing() {
                 <div>
                     <input
                         type="number"
+                        min="1"
                         id="quantity"
                         name="quantity"
                         value={quantity}
@@ -112,7 +150,9 @@ function AddListing() {
                 </div>
                 <div>
                     <input
-                        type="decimal"
+                        type="number"
+                        min="1"
+                        step="0.50"
                         id="price"
                         name="price"
                         value={price}
@@ -132,6 +172,12 @@ function AddListing() {
             {error && <p className="error">{error}</p>}
         </div>
     );
+
+    async function GetCards() {
+        const response = await fetch('/cards');
+        const data = await response.json();
+        setCards(data);
+    }
 }
 
 export default AddListing;

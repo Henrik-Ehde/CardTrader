@@ -3,6 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import CardDetails from '../Components/CardDetails';
 import Button from 'react-bootstrap/Button';
 
+//interface Card {
+//    id: number;
+//    title: string;
+//    text: string;
+//}
 function DeleteCard() {
     const { cardId } = useParams();
     const [error, setError] = useState<string>("");

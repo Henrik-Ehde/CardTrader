@@ -28,7 +28,7 @@ function CardListings() {
 
     const navigate = useNavigate();
     const handleAddListingClick = () => {
-        navigate("/addListing");
+        navigate(`/AddListing/${cardId}`);
     }
 
     useEffect(() => {

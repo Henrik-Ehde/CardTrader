@@ -13,6 +13,7 @@ import AddListing from './Pages/AddListing.tsx';
 import AuthorizeView from './Components/AuthorizeView.tsx';
 import DeleteCard from './Pages/DeleteCard.tsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import EditCard from './Pages/EditCard.tsx';
 
 
 function App() {
@@ -26,11 +27,16 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/addCard" element={<AddCard />} />
-                    <Route path="/Card/:cardId" element={<CardListings />} />
-                    <Route path="/DeleteCard/:cardId" element={<DeleteCard />} />
+
                     <Route path="/Cards" element={<CardManager />} />
+                    <Route path="/Card/:cardId" element={<CardListings />} />
+                    <Route path="/addCard" element={<AddCard />} />
+                    <Route path="/DeleteCard/:cardId" element={<DeleteCard />} />
+                    <Route path="/EditCard/:cardId" element={<EditCard />} />
+
+
                     <Route path="/Listings" element={<Listings />} />
+                    <Route path="/AddListing/:initialId" element={<AuthorizeView> <AddListing /> </AuthorizeView>} />                   
                     <Route path="/AddListing" element={<AuthorizeView> <AddListing /> </AuthorizeView>} />                   
 
                     <Route path="/" element={<Home />} />

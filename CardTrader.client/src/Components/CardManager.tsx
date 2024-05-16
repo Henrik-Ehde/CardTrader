@@ -39,6 +39,7 @@ function CardManager() {
                         <tr key={card.id}>
                             <td>{card.title}</td>
                             <td>{card.text}</td>
+                            <td> <Link to={`/EditCard/${card.id}`}> <Button variant="info"> Edit</Button> </Link> </td>
                             <td> <Link to={`/DeleteCard/${card.id}`}> <Button variant="warning"> Delete</Button> </Link> </td>
                         </tr>
                     )}

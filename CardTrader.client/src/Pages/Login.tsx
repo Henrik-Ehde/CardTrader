@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 function Login() {
     // state variables for email and passwords
     const [email, setEmail] = useState<string>("");
+    const [userName, setUserName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [rememberme, setRememberme] = useState<boolean>(false);
     // state variable for error messages
@@ -14,6 +15,10 @@ function Login() {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         if (name === "email") setEmail(value);
+        if (name === "userName") {
+            setUserName(value);
+            setEmail(value + "@cardtrader.com");
+        }
         if (name === "password") setPassword(value);
         if (name === "rememberme") setRememberme(e.target.checked);
     };
@@ -73,18 +78,18 @@ function Login() {
         <div className="containerbox">
             <h3>Login</h3>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label className="forminput" htmlFor="email">Email:</label>
-                </div>
-                <div>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={email}
-                        onChange={handleChange}
-                    />
-                </div>
+                    <div>
+                        <label className="forminput" htmlFor="userName">User Name:</label>
+                    </div>
+                    <div>
+                        <input
+                            type="text"
+                            id="userName"
+                            name="userName"
+                            value={userName}
+                            onChange={handleChange}
+                        />
+                    </div>
                 <div>
                     <label htmlFor="password">Password:</label>
                 </div>

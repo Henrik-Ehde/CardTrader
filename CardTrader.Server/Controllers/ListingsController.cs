@@ -87,12 +87,6 @@ namespace CardTrader.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Listing>> PostListing(PostListingDTO dto)
         {
-            //var card = await _context.Cards.FirstOrDefaultAsync(c => c.Id == listing.CardId);
-            //if (card == null)
-            //{
-            //    return BadRequest();
-            //}
-            //listing.Card = card;
             var User = await _context.Users.FirstAsync(x => x.Email == dto.UserEmail);
 
             Listing listing = new Listing();

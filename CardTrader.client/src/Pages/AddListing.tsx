@@ -1,6 +1,6 @@
-import { AuthorizedEmail, AuthorizedUser } from "../Components/AuthorizeView.tsx";
+import { AuthorizedEmail} from "../Components/AuthorizeView.tsx";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import {useParams } from "react-router-dom";
 import ReturnButton from "../Components/ReturnButton.tsx";
 import { Button } from "react-bootstrap";
 

@@ -1,6 +1,6 @@
 //import React from 'react';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import {useNavigate, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import ReturnButton from '../Components/ReturnButton';
 import { LoggedIn } from '../Components/LoggedInUser';
@@ -20,11 +20,18 @@ interface Listing {
     quantity: number;
     user: User;
     datePosted: Date;
+}
 
+interface Order {
+    buyerEmail: string;
+    sellerEmail: string;
+    status: string;
+    total: string;
 }
 
 interface User {
     name: string;
+    email: string;
     listings: Listing[]
 }
 function UserListings() {
@@ -35,6 +42,7 @@ function UserListings() {
     useEffect(() => {
         if (loggedInUser.name != undefined) {
             if (loggedInUser.name != userId) {
+
                 GetUser(userId);
             }
             else navigate("/mylistings");
@@ -42,12 +50,8 @@ function UserListings() {
     }, [userId, loggedInUser]);
 
     const [listings, setListings] = useState([]);
-    const [buyQuantity, setBuyQuantity] = useState(0);
 
     const navigate = useNavigate();
-    const handleAddListingClick = () => {
-        navigate(`/AddListing/`);
-    }
 
     const clamp = (num, min, max) => num > max ? max : num < min ? min : num
 
@@ -80,6 +84,69 @@ function UserListings() {
         }
     }, [user]);
 
+
+
+
+    const [order, setOrder] = useState<Order>();
+    const [error, setError] = useState("");
+
+    const SubmitOrder = () => {
+
+        const buyListings = listings.filter(l => l.buyQuantity > 0).map(l => l);
+        let total = 0;
+        const data = buyListings.map(function (l) {
+            total += l.price * l.buyQuantity
+                return {
+                    "cardId": l.cardId,
+                    "quantity": l.buyQuantity,
+                    "subTotal": l.price * l.buyQuantity
+                };
+
+        });
+
+        console.log(JSON.stringify(data));
+
+
+
+            console.log(JSON.stringify({
+                sellerEmail: user.email,
+                buyerEmail: loggedInUser.email,
+                total: total,
+                "items": data
+            }))
+
+            // post data
+            fetch("/orders", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    sellerEmail: user.email,
+                    buyerEmail: loggedInUser.email,
+                    total: total,
+                    status: "Placed",
+                    "items": data
+                }),
+            })
+                //.then((response) => response.json())
+                .then((data) => {
+                    // handle success or error from the server
+                    console.log(data);
+                    if (data.ok)
+                        setError("Order Placed.");
+                    else
+                        setError("Error Placing Order.");
+
+                })
+                .catch((error) => {
+                    // handle network error
+                    console.error(error);
+                    setError("Error placing order.");
+                });
+        
+    };
+
     const contents = user === undefined
         ? <p><em>Loading listings for user {userId}</em></p>
         : <div>
@@ -110,7 +177,10 @@ function UserListings() {
                     )}
                 </tbody>
             </table>
+            <Button onClick={SubmitOrder} variant="success"> Submit Order </Button>
+            {error && <p className="error">{error}</p>}
         </div>
+
   return (
       <div>
           {contents}
@@ -132,6 +202,8 @@ function UserListings() {
         console.log('Setting User')
 
     }
+
+
 }
 
 export default UserListings;

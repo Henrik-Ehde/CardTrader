@@ -7,9 +7,10 @@ namespace CardTrader.Server.Models
     {
 
         public List<Listing> Listings { get; set; }
+        public List<Order> BuyOrders { get; set; }
+        public List<Order> SellOrders { get; set; }
         public string Name
         {
-            //get { return "MR. "+UserName; }
             get { return UserName.Split("@")[0]; }
         }
     }

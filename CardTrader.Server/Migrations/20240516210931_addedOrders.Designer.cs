@@ -4,6 +4,7 @@ using CardTrader.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CardTrader.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240516210931_addedOrders")]
+    partial class addedOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +43,7 @@ namespace CardTrader.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cards", (string)null);
+                    b.ToTable("Cards");
                 });
 
             modelBuilder.Entity("CardTrader.Server.Models.Listing", b =>
@@ -73,7 +76,7 @@ namespace CardTrader.Server.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Listings", (string)null);
+                    b.ToTable("Listings");
                 });
 
             modelBuilder.Entity("CardTrader.Server.Models.Order", b =>
@@ -106,7 +109,7 @@ namespace CardTrader.Server.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("CardTrader.Server.Models.OrderItem", b =>
@@ -135,7 +138,7 @@ namespace CardTrader.Server.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("CardTrader.Server.Models.User", b =>

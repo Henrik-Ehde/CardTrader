@@ -55,7 +55,9 @@ function UserListings() {
 
     const clamp = (num, min, max) => num > max ? max : num < min ? min : num
 
+    const [total, setTotal] = useState(0);
     const handleIncrementClick = (event) => {
+
         const listingId = event.currentTarget.getAttribute("listingid");
         const value = parseInt(event.currentTarget.getAttribute("value"));
         const newListings = listings.map((l) => {
@@ -69,6 +71,14 @@ function UserListings() {
             }
         });
         setListings(newListings);
+
+        let newTotal = 0;
+        console.log("Total: " + total)
+        newListings.map((l) => {
+            newTotal += l.price*l.buyQuantity
+            console.log("Total: "+newTotal)
+        })
+        setTotal(newTotal);
     }
 
     useEffect(() => {
@@ -89,14 +99,13 @@ function UserListings() {
 
     const [order, setOrder] = useState<Order>();
     const [error, setError] = useState("");
-    const [total, setTotal] = useState("");
 
     const SubmitOrder = () => {
 
         const buyListings = listings.filter(l => l.buyQuantity > 0).map(l => l);
         let total = 0;
         const data = buyListings.map(function (l) {
-            total += l.price * l.buyQuantity
+            total += l.price * l.buyQuantity;
                 return {
                     "cardId": l.cardId,
                     "quantity": l.buyQuantity,
@@ -182,7 +191,7 @@ function UserListings() {
                         </tr>
                     )}
                     <tr>
-                        <td /><td /><td /> <td><strong>Total: </strong></td><td>{total]</td>
+                        <td /><td /><td /><td /><td /> <td><strong>Total: </strong></td><td>{total}</td>
                     </tr>
                 </tbody>
             </table>

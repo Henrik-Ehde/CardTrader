@@ -73,10 +73,8 @@ function UserListings() {
         setListings(newListings);
 
         let newTotal = 0;
-        console.log("Total: " + total)
         newListings.map((l) => {
-            newTotal += l.price*l.buyQuantity
-            console.log("Total: "+newTotal)
+            newTotal += l.price * l.buyQuantity;
         })
         setTotal(newTotal);
     }
@@ -187,7 +185,7 @@ function UserListings() {
                             <td> {l.buyQuantity < l.quantity &&
                                 <Button onClick={handleIncrementClick} value={1} listingid={l.id} variant="info"> + </Button>
                             }</td>
-                            {l.buyQuantity > 0 && l.buyQuantity*l.price }
+                            <td>{l.buyQuantity > 0 && l.buyQuantity * l.price}</td>
                         </tr>
                     )}
                     <tr>

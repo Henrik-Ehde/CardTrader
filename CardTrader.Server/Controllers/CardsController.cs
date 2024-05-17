@@ -33,7 +33,7 @@ namespace CardTrader.Server.Controllers
         public async Task<ActionResult<IEnumerable<CardDTO>>> GetCardDTOs()
         {
             List<CardDTO> DTOList = new List<CardDTO>();;
-            var cards = await _context.Cards.Include(c => c.Listings).ThenInclude(l => l.User).ToListAsync();
+            var cards = await _context.Cards.Include(c => c.Listings).ThenInclude(l => l.User).IgnoreAutoIncludes().ToListAsync();
             foreach (Card card in cards)
             {
                 DTOList.Add(new CardDTO()

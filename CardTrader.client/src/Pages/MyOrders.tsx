@@ -42,52 +42,7 @@ function MyOrders() {
     const contents = user === undefined
         ? <p><em>Loading your Orders</em></p>
         : <div>
-            <h2>Your Sales</h2>
-            {user.sellOrders.map(order =>
-                <>
-                    <div className="containerbox">
-                        <span className="big">
-                            <a href={`/BuyFromUser/${order.buyer.name}`}> {order.buyer.name} </a>
-                            <span className="right-align"> {order.date} </span>
-                            <p><strong>{"Status:"} </strong> {order.status}</p>
-                        </span>
-
-                        <table className="table table-striped" aria-labelledby="tabelLabel">
-                            <thead>
-                                <tr>
-                                    <th> Card </th>
-                                    <th> Quantity </th>
-                                    <th> price </th>
-                                </tr>
-
-
-                            </thead>
-                            <tbody>
-                                {order.orderItems.map(item => <>
-                                    <tr key={item.id}>
-                                        <td> {item.card.title} </td>
-                                        <td> {item.quantity} </td>
-                                        <td> {item.subTotal} </td>
-
-
-                                    </tr>
-                                </>)}
-
-                                <tr>
-                                    <td />
-                                    <td><strong>Total:</strong></td>
-                                    <td><strong>{order.total}</strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <br />
-                </>
-
-            )}
-
-
-            <h2>Your Purchases</h2>
+             <h2>Your Purchases</h2>
             {user.buyOrders.map(order =>
                 <>
                     <div className="containerbox">
@@ -131,7 +86,51 @@ function MyOrders() {
                     <br />
                 </>
                 
-                    )}
+            )}
+
+            <h2>Your Sales</h2>
+            {user.sellOrders.map(order =>
+                <>
+                    <div className="containerbox">
+                        <span className="big">
+                            <a href={`/BuyFromUser/${order.buyer.name}`}> {order.buyer.name} </a>
+                            <span className="right-align"> {order.date} </span>
+                            <p><strong>{"Status:"} </strong> {order.status}</p>
+                        </span>
+
+                        <table className="table table-striped" aria-labelledby="tabelLabel">
+                            <thead>
+                                <tr>
+                                    <th> Card </th>
+                                    <th> Quantity </th>
+                                    <th> price </th>
+                                </tr>
+
+
+                            </thead>
+                            <tbody>
+                                {order.orderItems.map(item => <>
+                                    <tr key={item.id}>
+                                        <td> {item.card.title} </td>
+                                        <td> {item.quantity} </td>
+                                        <td> {item.subTotal} </td>
+
+
+                                    </tr>
+                                </>)}
+
+                                <tr>
+                                    <td />
+                                    <td><strong>Total:</strong></td>
+                                    <td><strong>{order.total}</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br />
+                </>
+
+            )}
 
 
         </div>

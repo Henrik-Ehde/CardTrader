@@ -11,7 +11,6 @@ function Header() {
         <>
             <span>
                 <button onClick={handleHomeClick}>Home</button>
-                <Link to="/Cards"> <button>Cards</button> </Link>
             </span>
             <UserLinks />
         </>

@@ -24,6 +24,7 @@ function UserLinks() {
     return (
         <>
             {loggedIn != null ? < span >
+                <Link to="/Cards"> <button>Cards</button> </Link>
                 <> <Link to={`/MyListings`}> <button> My Listings</button> </Link> </>
                 <Link to="/MyOrders"> <button>My Orders</button> </Link>
 

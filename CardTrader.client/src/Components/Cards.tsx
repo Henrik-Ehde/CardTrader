@@ -34,15 +34,6 @@ function Cards() {
         setSearchInput(e.target.value);
     };
 
-    //function nav(cardId: number) {
-    //    navigate("/"+cardId)
-    //}
-
-    //const handleCardClick = (/*id: number*/) => {
-    //    //navigate("/Card");
-    //    nav(key);
-    //}
-
     const contents = cards === undefined
         ? <p><em>Loading... </em></p>
         : <>

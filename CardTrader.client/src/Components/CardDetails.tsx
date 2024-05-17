@@ -69,13 +69,6 @@ function CardDetails() {
    
         const data = await response.json();
         setCard(data);
-        console.log('Setting Cards')
-        const url = await fetch('https://api.swu-db.com/cards/search?q=c=3&pretty=true', { mode: 'no-cors' })
-        const imgResponse = await url.json();
-        console.log(imgResponse);
-
-        
-
     }
 }
 

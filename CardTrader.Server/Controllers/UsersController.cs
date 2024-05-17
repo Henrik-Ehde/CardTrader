@@ -30,8 +30,10 @@ namespace CardTrader.Server.Controllers
             var email = name + "@cardtrader.com";
             var user = await _context.Users.
                 Include(u => u.BuyOrders).ThenInclude(o => o.OrderItems).ThenInclude(i => i.Card).
+                Include(u => u.BuyOrders).ThenInclude(o => o.Seller).
                 Include(u => u.SellOrders).ThenInclude(o => o.OrderItems).ThenInclude(i => i.Card).
-                Include(u => u.Listings).ThenInclude(l => l.Card).
+                Include(u => u.SellOrders).ThenInclude(o => o.Buyer).
+                Include(u => u.Listings).ThenInclude(l => l.Card).IgnoreAutoIncludes().
                 FirstAsync(u => u.Email == email);
 
             if (user == null)

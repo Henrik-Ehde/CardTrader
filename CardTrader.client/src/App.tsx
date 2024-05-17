@@ -18,7 +18,7 @@ import DeleteListing from './Pages/DeleteListing.tsx';
 import EditListing from './Pages/EditListing.tsx';
 import BuyFromUser from './Pages/BuyFromUser.tsx';
 import MyListings from './Pages/MyListings.tsx';
-import Orders from './Components/Orders.tsx';
+import MyOrders from './Pages/MyOrders.tsx';
 
 
 function App() {
@@ -49,7 +49,7 @@ function App() {
                     <Route path="/BuyFromUser/:userId" element={<BuyFromUser />} />
                     <Route path="/MyListings" element={<MyListings />} />
 
-                    <Route path="/Orders" element={<Orders />} />
+                    <Route path="/MyOrders" element={<MyOrders />} />
 
                     <Route path="/" element={<Home />} />
                     

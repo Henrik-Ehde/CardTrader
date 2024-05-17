@@ -25,3 +25,13 @@ th, td {
     padding: 20px;
     text-align: left;
 }
+
+.big {
+    font-size: 20px;
+/*    display: flex;*/
+}
+
+.right-align {
+    text-align: right;
+    margin-left: 150px;
+}

@@ -97,6 +97,11 @@ namespace CardTrader.Server.Controllers
                 item.SubTotal = i.SubTotal;
                 item.Order = order;
                 _context.OrderItems.Add(item);
+
+                Listing listing = await _context.Listings.FirstAsync(x => x.Id == i.ListingId);
+                listing.Quantity -= item.Quantity;
+                if (listing.Quantity < 1) _context.Remove(listing);
+                else _context.Entry(listing).State = EntityState.Modified;
             }
 
             order.Status = dto.Status;

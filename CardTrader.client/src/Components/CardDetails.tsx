@@ -32,6 +32,11 @@ function CardDetails() {
     const contents = card === undefined
         ? <p><em>Loading card {cardId}</em></p>
         : <div>
+            <img
+                //src="https://api.swu-db.com/cards/named?waylay&format=image"
+                src="https://api.swu-db.com/cards/sor/361?format=image"
+                alt="new"
+            />
             <table className="table table-striped" aria-labelledby="tabelLabel">
                 <tbody>
                         <tr>
@@ -65,6 +70,11 @@ function CardDetails() {
         const data = await response.json();
         setCard(data);
         console.log('Setting Cards')
+        const url = await fetch('https://api.swu-db.com/cards/search?q=c=3&pretty=true', { mode: 'no-cors' })
+        const imgResponse = await url.json();
+        console.log(imgResponse);
+
+        
 
     }
 }

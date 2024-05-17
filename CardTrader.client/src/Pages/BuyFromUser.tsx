@@ -89,6 +89,7 @@ function UserListings() {
 
     const [order, setOrder] = useState<Order>();
     const [error, setError] = useState("");
+    const [total, setTotal] = useState("");
 
     const SubmitOrder = () => {
 
@@ -99,7 +100,8 @@ function UserListings() {
                 return {
                     "cardId": l.cardId,
                     "quantity": l.buyQuantity,
-                    "subTotal": l.price * l.buyQuantity
+                    "subTotal": l.price * l.buyQuantity,
+                    "listingId": l.id 
                 };
 
         });
@@ -133,8 +135,11 @@ function UserListings() {
                 .then((data) => {
                     // handle success or error from the server
                     console.log(data);
-                    if (data.ok)
+                    if (data.ok) {
                         setError("Order Placed.");
+                        GetUser(userId);
+                    }
+
                     else
                         setError("Error Placing Order.");
 
@@ -173,8 +178,12 @@ function UserListings() {
                             <td> {l.buyQuantity < l.quantity &&
                                 <Button onClick={handleIncrementClick} value={1} listingid={l.id} variant="info"> + </Button>
                             }</td>
+                            {l.buyQuantity > 0 && l.buyQuantity*l.price }
                         </tr>
                     )}
+                    <tr>
+                        <td /><td /><td /> <td><strong>Total: </strong></td><td>{total]</td>
+                    </tr>
                 </tbody>
             </table>
             <Button onClick={SubmitOrder} variant="success"> Submit Order </Button>

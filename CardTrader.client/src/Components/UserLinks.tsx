@@ -24,9 +24,10 @@ function UserLinks() {
     return (
         <>
             {loggedIn != null ? < span >
-                {/*<button> User Page </button>*/}
                 <> <Link to={`/MyListings`}> <button> My Listings</button> </Link> </>
-                <LogoutLink /*setter={/setloggedIn}*/ >Logout </LogoutLink></span >
+                <Link to="/MyOrders"> <button>My Orders</button> </Link>
+
+                <LogoutLink> Logout </LogoutLink></span >
 
                 : <span>
                     

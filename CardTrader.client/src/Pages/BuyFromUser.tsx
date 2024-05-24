@@ -1,6 +1,6 @@
 //import React from 'react';
 import { useEffect, useState } from 'react';
-import {useNavigate, useParams } from 'react-router-dom';
+import {Link, useNavigate, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import ReturnButton from '../Components/ReturnButton';
 import { LoggedIn } from '../Components/LoggedInUser';
@@ -40,13 +40,19 @@ function UserListings() {
     const loggedInUser = LoggedIn();
 
     useEffect(() => {
-        if (loggedInUser.name != undefined) {
-            if (loggedInUser.name != userId) {
+        if (loggedInUser != undefined) {
+            if (loggedInUser.name == userId) navigate("/mylistings");
 
-                GetUser(userId);
-            }
-            else navigate("/mylistings");
+            else GetUser(userId);
         }
+
+        //if (loggedInUser.name != undefined) {
+        //    if (loggedInUser.name != userId) {
+
+        //        GetUser(userId);
+        //    }
+        //    else navigate("/mylistings");
+        //}
     }, [userId, loggedInUser]);
 
     const [listings, setListings] = useState([]);
@@ -169,6 +175,7 @@ function UserListings() {
                         <th>Card</th>
                         <th>Price</th>
                         <th>Quantity</th>
+                        {loggedInUser != null && <th />}
                         <th>Buy</th>
                     </tr>
                 </thead>
@@ -178,22 +185,32 @@ function UserListings() {
                             <td> <a href={`/Card/${l.card.id}`}> {l.card.title} </a></td>
                             <td>{l.price}</td>
                             <td>{l.quantity}</td>
-                            <td>{l.buyQuantity > 0 &&
-                                    <Button onClick={handleIncrementClick} value={-1} listingid={l.id} variant="warning"> - </Button>
-                            }</td>
-                            <td> <strong>{" " + l.buyQuantity + " "} </strong> </td>
-                            <td> {l.buyQuantity < l.quantity &&
-                                <Button onClick={handleIncrementClick} value={1} listingid={l.id} variant="info"> + </Button>
-                            }</td>
-                            <td>{l.buyQuantity > 0 && l.buyQuantity * l.price}</td>
+
+                            {loggedInUser == null
+                                ? <td> <Link to={`/Login`}> <Button variant="outline-secondary"> Login to Buy</Button> </Link> </td>
+
+                                : <>
+                                    <td>{l.buyQuantity > 0 &&
+                                        <Button onClick={handleIncrementClick} value={-1} listingid={l.id} variant="warning"> - </Button>
+                                    }</td>
+                                    <td> <strong>{" " + l.buyQuantity + " "} </strong> </td>
+                                    <td> {l.buyQuantity < l.quantity &&
+                                        <Button onClick={handleIncrementClick} value={1} listingid={l.id} variant="info"> + </Button>
+                                    }</td>
+                                    <td>{l.buyQuantity > 0 && l.buyQuantity * l.price}</td>
+                                </>
+                            }
+
                         </tr>
                     )}
-                    <tr>
-                        <td /><td /><td /><td /><td /> <td><strong>Total: </strong></td><td>{total}</td>
-                    </tr>
+                    {loggedInUser != null &&
+                        <tr>
+                            <td /><td /><td /><td /><td /> <td><strong>Total: </strong></td><td>{total}</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
-            <Button onClick={SubmitOrder} variant="success"> Submit Order </Button>
+            {loggedInUser != null && <Button onClick={SubmitOrder} variant="success"> Submit Order </Button>}
             {error && <p className="error">{error}</p>}
         </div>
 

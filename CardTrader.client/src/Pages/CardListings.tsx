@@ -60,16 +60,18 @@ function CardListings() {
                             <td> <a href={`/BuyFromUser/${listing.user.name}`}> {listing.user.name} </a></td>
                             <td>{listing.price}</td>
                             <td>{listing.quantity}</td>
-                            {loggedInUser != null ?
-                                loggedInUser.name == listing.user.name ?
+                            {loggedInUser == null
+                                ? <td> <Link to={`/Login`}> <Button variant="outline-secondary"> Login to trade</Button> </Link> </td>
 
-                                    <td>
+                                : loggedInUser.name == listing.user.name
+                                    ? <td>
                                         <> <Link to={`/EditListing/${listing.id}`}> <Button variant="info"> Edit</Button> </Link> </>
                                         <> <Link to={`/DeleteListing/${listing.id}`}> <Button variant="warning"> Delete</Button> </Link> </>
                                     </td>
+
                                     : <td> <Link to={`/BuyFromUser/${listing.user.name}`}> <Button variant="success"> Buy Cards</Button> </Link> </td>
 
-                                : <td> <Link to={`/Login`}> <Button variant="outline-secondary"> Login to trade</Button> </Link> </td>
+                                
 
                             }
 

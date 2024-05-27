@@ -36,10 +36,8 @@ function UserListings() {
     }
 
     useEffect(() => {
-        if (loggedInUser.name != undefined) {
-            GetUser(loggedInUser.name);
-        }
-
+        if (loggedInUser == null) navigate("/");
+        else if (loggedInUser.name != undefined) GetUser(loggedInUser.name);
     }, [loggedInUser]);
 
     const contents = user === undefined

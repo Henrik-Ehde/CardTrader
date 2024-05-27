@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import ReturnButton from '../Components/ReturnButton';
 import { LoggedIn } from '../Components/LoggedInUser';
+import { Nav } from 'react-bootstrap';
 
 interface Card {
     id: number;
@@ -33,10 +34,8 @@ function MyOrders() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (loggedInUser.name != undefined) {
-            GetUser(loggedInUser.name);
-        }
-
+        if (loggedInUser == null) navigate("/");
+        else if (loggedInUser.name != undefined) GetUser(loggedInUser.name);
     }, [loggedInUser]);
 
     const contents = user === undefined

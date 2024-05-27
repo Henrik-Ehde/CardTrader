@@ -3,10 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "CardTrader.client", "CardTrader.client\CardTrader.client.esproj", "{CD2E465D-2DAC-44E2-BCA1-23E1411892FC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardTrader.Server", "CardTrader.Server\CardTrader.Server.csproj", "{8FEBE637-5CC0-4C91-8C7F-C1F82F7FF1F2}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "CardTrader.client", "CardTrader.client\CardTrader.client.esproj", "{CD2E465D-2DAC-44E2-BCA1-23E1411892FC}"
+EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

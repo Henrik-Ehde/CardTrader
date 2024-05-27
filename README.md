@@ -18,7 +18,8 @@ The project contains a frontend created with React and an ASP.NET API connected 
 ## INSTRUCTIONS
 To download this project and try out the app with a local database:
 1. In visual studio, Select **Clone Repository**, copy and paste this url: https://github.com/Henrik-Ehde/CardTrader.git
-2. Open Package Manager Console, write **update-database** and press enter to create the database
-3. Press **F5** to launch the website in your browser
+2. Open **Package Manager Console**, write **update-database** and press Enter to create the database
+3. Write **NPM Install** in **Package Manager Console** and press Enter to download all required packages
+4. Press **F5** to launch the website in your browser
 
 

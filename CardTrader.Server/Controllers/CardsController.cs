@@ -33,7 +33,12 @@ namespace CardTrader.Server.Controllers
         public async Task<ActionResult<IEnumerable<CardDTO>>> GetCardDTOs()
         {
             List<CardDTO> DTOList = new List<CardDTO>();;
-            var cards = await _context.Cards.Include(c => c.Listings).ThenInclude(l => l.User).IgnoreAutoIncludes().ToListAsync();
+            var cards = await _context.Cards.
+                Include(c => c.Listings).
+                /*ThenInclude(l => l.User).*/
+                //IgnoreAutoIncludes().
+                ToListAsync();
+
             foreach (Card card in cards)
             {
                 DTOList.Add(new CardDTO()
@@ -44,7 +49,6 @@ namespace CardTrader.Server.Controllers
                     Listings = card.Listings,
                     NumberOfListings = card.Listings.Count,
                     NumberOfCards = card.Listings.Sum(l => l.Quantity),
-                    //bestPrice = card.Listings.DefaultIfEmpty().Min(l => l.Price)
                     BestPrice = card.Listings.Select(l => l.Price).DefaultIfEmpty().Min()
                 }) ;
             }
@@ -54,7 +58,6 @@ namespace CardTrader.Server.Controllers
 
         // GET: Cards/5
         [HttpGet("{id}")]
-        [Produces("application/json")]
         public async Task<ActionResult<Card>> GetCard(int id)
         {
             var card = await _context.Cards.Include(c => c.Listings).ThenInclude(l => l.User).FirstAsync(c => c.Id == id);

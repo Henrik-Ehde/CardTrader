@@ -26,7 +26,6 @@ function Cards() {
         GetCards();
     }, []);
 
-    const searchBar = () => { }
     const [searchInput, setSearchInput] = useState("");
 
     const handleSearchChange = (e) => {
@@ -62,7 +61,10 @@ function Cards() {
                                 <td> <a href={`/Card/${card.id}`}> {card.title} </a></td>
                                 <td>{card.numberOfListings}</td>
                                 <td>{card.numberOfCards}</td>
-                                <td>{card.bestPrice}</td>
+                                {card.bestPrice == 0
+                                    ? <td> n/a </td>
+                                    : <td>{card.bestPrice}</td>
+                                }                               
                             </tr>}
                         </>
 

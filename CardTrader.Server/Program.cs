@@ -50,7 +50,7 @@ namespace CardTrader.Server
             app.MapGet("/pingauth", (ClaimsPrincipal user) =>
             {
                 var email = user.FindFirstValue(ClaimTypes.Email); // get the user's email from the claim
-                return Results.Json(new { Email = email, Name = email.Split("@")[0] }) ; // return the email as a plain text response
+                return Results.Json(new { Email = email, Name = email.Split("@")[0] }) ;
             }).RequireAuthorization();
 
 

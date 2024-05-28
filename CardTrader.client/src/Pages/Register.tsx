@@ -22,14 +22,12 @@ function Register() {
     // handle change events for input fields
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        if (name === "email") setEmail(value);
-        if (name === "userName") {
+        if (name === "password") setPassword(value);
+        else if (name === "confirmPassword") setConfirmPassword(value);
+        else if (name === "userName") {
             setUserName(value);
             setEmail(value + "@cardtrader.com");
         }
-
-        if (name === "password") setPassword(value);
-        if (name === "confirmPassword") setConfirmPassword(value);
     };
 
     // handle submit event for the form
@@ -79,18 +77,6 @@ function Register() {
             <h3>Register</h3>
 
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                </div><div>
-                    <input
-                        disabled={true}
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={email}
-                        onChange={handleChange}
-                    />
-                </div>
                 <div>
                     <label htmlFor="userName">User Name:</label>
                 </div><div>

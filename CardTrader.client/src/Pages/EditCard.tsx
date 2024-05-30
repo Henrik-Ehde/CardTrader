@@ -44,13 +44,11 @@ function EditCard() {
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         setTitle(value);
-        //title = value;
     };
 
     const handleTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const { value } = e.target;
         setText(value);
-        //text = value;
     };
 
     // handle submit event for the form
@@ -62,7 +60,7 @@ function EditCard() {
             // clear error message
             setError("");
             // post data
-            fetch('/cards/' + cardId, {
+            fetch(import.meta.env.VITE_API_URL + 'cards/' + cardId, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -72,7 +70,6 @@ function EditCard() {
                     text: text,
                 }),
             })
-                //.then((response) => response.json())
                 .then((data) => {
                     // handle success or error from the server
                     console.log(data);
@@ -140,7 +137,7 @@ function EditCard() {
 
     async function GetCard(cardId: string) {
         console.log('fetching cards/' + cardId);
-        const response = await fetch('/cards/' + cardId);
+        const response = await fetch(import.meta.env.VITE_API_URL + 'cards/' + cardId);
 
         //For Debugging
         //console.log('awaiting data')

@@ -1,7 +1,5 @@
 import Cards from "../Components/Cards.tsx";
 
-//import { useState } from "react";
-
 function Home() {
 
 
@@ -10,12 +8,6 @@ function Home() {
         <div >
             <Cards />
         </div>
-
-
-            
-
-
-
     );
 }
 

@@ -49,7 +49,8 @@ namespace CardTrader.Server.Controllers
                     Listings = card.Listings,
                     NumberOfListings = card.Listings.Count,
                     NumberOfCards = card.Listings.Sum(l => l.Quantity),
-                    BestPrice = card.Listings.Select(l => l.Price).DefaultIfEmpty().Min()
+                    BestPrice = card.Listings.Select(l => l.Price).DefaultIfEmpty().Min(),
+                    
                 }) ;
             }
 
@@ -66,6 +67,8 @@ namespace CardTrader.Server.Controllers
             {
                 return NotFound();
             }
+
+            card.Listings = card.Listings.OrderBy(l => l.Price).ToList();
 
             return card;
         }

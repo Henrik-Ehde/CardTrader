@@ -60,7 +60,7 @@ function CardDetails() {
 
     async function GetCard(cardId: string) {
         console.log('fetching cards/' + cardId);
-        const response = await fetch('/cards/' + cardId);
+        const response = await fetch(import.meta.env.VITE_API_URL + 'cards/' + cardId);
 
         //For Debugging
         //console.log('awaiting data')

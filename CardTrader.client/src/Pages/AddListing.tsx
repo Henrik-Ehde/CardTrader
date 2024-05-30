@@ -46,7 +46,6 @@ function AddListing() {
 
 
 
-
     // handle change events for input fields
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -54,11 +53,6 @@ function AddListing() {
         if (name === "quantity") setQuantity(value);
         if (name === "price") setPrice(value);
     };
-
-    //const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    //    const {value } = e.target;
-    //    setCardId(value);
-    //};
 
     // handle submit event for the form
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -78,7 +72,7 @@ function AddListing() {
             }))
 
             // post data
-            fetch("/listings", {
+            fetch(import.meta.env.VITE_API_URL + "listings", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -95,15 +89,15 @@ function AddListing() {
                     // handle success or error from the server
                     console.log(data);
                     if (data.ok)
-                        setError("Card Successfully added.");
+                        setError("Listing successfully posted.");
                     else
-                        setError("Error adding card.");
+                        setError("Error posting listing.");
 
                 })
                 .catch((error) => {
                     // handle network error
                     console.error(error);
-                    setError("Error adding card.");
+                    setError("Error posting listing.");
                 });
         }
     };
@@ -111,13 +105,8 @@ function AddListing() {
     return (
         <div className="containerbox">
             <h3>Add Listing</h3>
-{/*            <h4> <AuthorizedUser value="email" /> </h4>*/}
-
-
 
             <form onSubmit={handleSubmit}>
-
-
                 <div>
                     <label htmlFor="Card">Card:</label>
                 </div>
@@ -150,7 +139,7 @@ function AddListing() {
                     <input
                         type="number"
                         min="1"
-                        step="0.50"
+                        step="1"
                         id="price"
                         name="price"
                         value={price}
@@ -169,7 +158,7 @@ function AddListing() {
     );
 
     async function GetCards() {
-        const response = await fetch('/cards');
+        const response = await fetch(import.meta.env.VITE_API_URL + '/cards');
         const data = await response.json();
         setCards(data);
     }

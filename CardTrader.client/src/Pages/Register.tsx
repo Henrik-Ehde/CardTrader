@@ -44,7 +44,7 @@ function Register() {
             // clear error message
             setError("");
             // post data to the /register api
-            fetch("/register", {
+            fetch(import.meta.env.VITE_API_URL + "register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

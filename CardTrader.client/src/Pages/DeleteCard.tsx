@@ -4,11 +4,6 @@ import CardDetails from '../Components/CardDetails';
 import Button from 'react-bootstrap/Button';
 import ReturnButton from '../Components/ReturnButton';
 
-//interface Card {
-//    id: number;
-//    title: string;
-//    text: string;
-//}
 function DeleteCard() {
     const { cardId } = useParams();
     const [error, setError] = useState<string>("");
@@ -20,7 +15,7 @@ function DeleteCard() {
 
     const handleDeleteClick = () => {
             // post data
-        fetch('/cards/' + cardId, {
+        fetch(import.meta.env.VITE_API_URL + 'cards/' + cardId, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

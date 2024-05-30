@@ -44,7 +44,7 @@ function UserListings() {
         ? <p><em>Loading your listings</em></p>
         : <div>
             <h2>Your Listings</h2>
-            <button onClick={handleAddListingClick}>Add Listing</button>
+            <Link to="/AddListing"> <button> Add Listing </button> </Link>
             <table className="table table-striped" aria-labelledby="tabelLabel">
                 <thead>
                     <tr>
@@ -56,7 +56,8 @@ function UserListings() {
                 <tbody>
                     {user.listings.map(listing =>
                         <tr key={listing.id}>
-                            <td> <a href={`/Card/${listing.card.id}`}> {listing.card.title} </a></td>
+{/*                            <td> <a href={`/#/Card/${listing.card.id}`}> {listing.card.title} </a></td>*/}
+                            <td> <Link to={`/Card/${listing.card.id}`}> {listing.card.title} </Link> </td>
                             <td>{listing.price}</td>
                             <td>{listing.quantity}</td>
                             <td> <Link to={`/EditListing/${listing.id}`}> <Button variant="info"> Edit</Button> </Link> </td>
@@ -74,7 +75,7 @@ function UserListings() {
     );
 
     async function GetUser(userName: string) {
-        const response = await fetch('/users/' + userName);
+        const response = await fetch(import.meta.env.VITE_API_URL + 'users/' + userName);
 
 ///*        For Debugging*/
 //        console.log('awaiting data')

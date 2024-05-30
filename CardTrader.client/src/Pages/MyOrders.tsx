@@ -1,10 +1,7 @@
-//import React from 'react';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import { Link, useNavigate} from 'react-router-dom';
 import ReturnButton from '../Components/ReturnButton';
 import { LoggedIn } from '../Components/LoggedInUser';
-import { Nav } from 'react-bootstrap';
 
 interface Card {
     id: number;
@@ -47,7 +44,7 @@ function MyOrders() {
                     <div className="containerbox">
                         <span className="big">
                             <span className="big">
-                                <a href={`/BuyFromUser/${order.seller.name}`}> {order.seller.name} </a>
+                                <strong> {"Seller: "} </strong> <Link to={`/BuyFromUser/${order.seller.name}`}>  {order.seller.name} </Link>
                                 <span className="right-align"> {order.date} </span>
                                 <p><strong>{"Status:"} </strong> {order.status}</p>
                             </span>
@@ -92,7 +89,7 @@ function MyOrders() {
                 <>
                     <div className="containerbox">
                         <span className="big">
-                            <a href={`/BuyFromUser/${order.buyer.name}`}> {order.buyer.name} </a>
+                            Buyer: <Link to={`/BuyFromUser/${order.buyer.name}`}>  {order.buyer.name} </Link>
                             <span className="right-align"> {order.date} </span>
                             <p><strong>{"Status:"} </strong> {order.status}</p>
                         </span>
@@ -133,6 +130,7 @@ function MyOrders() {
 
 
         </div>
+
   return (
       <div>
           {contents}
@@ -141,7 +139,7 @@ function MyOrders() {
     );
 
     async function GetUser(userName: string) {
-        const response = await fetch('/users/' + userName);
+        const response = await fetch(import.meta.env.VITE_API_URL + 'users/' + userName);
 
 ///*        For Debugging*/
 //        console.log('awaiting data')

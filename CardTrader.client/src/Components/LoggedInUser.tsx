@@ -15,7 +15,7 @@ export function LoggedIn() {
 
     const [authorized, setAuthorized] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true); // add a loading state
-    let emptyuser: User = { email: "" };
+    let emptyuser: User = { email: "", name: "" };
 
     const [user, setUser] = useState(emptyuser);
 
@@ -67,7 +67,7 @@ export function LoggedIn() {
         }
 
         // call the fetch function with retry logic
-        fetchWithRetry("/pingauth", {
+        fetchWithRetry(import.meta.env.VITE_API_URL + "pingauth", {
             method: "GET",
         })
             .catch((error) => {

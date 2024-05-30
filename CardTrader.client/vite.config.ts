@@ -47,39 +47,39 @@ export default defineConfig({
     server: {
         proxy: {
             '^/weatherforecast': {
-                target: 'https://localhost:7249/',
+                target: 'https://cardtraderapi.azurewebsites.net/',
                 secure: false
             },
             '^/cards': {
-                target: 'https://localhost:7249/',
+                target: 'https://cardtraderapi.azurewebsites.net/',
                 secure: false
             },
             '^/listings': {
-                target: 'https://localhost:7249/',
+                target: 'https://cardtraderapi.azurewebsites.net/',
                 secure: false
             },
             '^/users': {
-                target: 'https://localhost:7249/',
+                target: 'https://cardtraderapi.azurewebsites.net/',
                 secure: false
             },
             '^/orders': {
-                target: 'https://localhost:7249/',
+                target: 'https://cardtraderapi.azurewebsites.net/',
                 secure: false
             },
             '^/pingauth': {
-                target: 'https://localhost:7249/',
+                target: 'https://cardtraderapi.azurewebsites.net/',
                 secure: false
             },
             '^/register': {
-                target: 'https://localhost:7249/',
+                target: 'https://cardtraderapi.azurewebsites.net/',
                 secure: false
             },
             '^/login': {
-                target: 'https://localhost:7249/',
+                target: 'https://cardtraderapi.azurewebsites.net/',
                 secure: false
             },
             '^/logout': {
-                target: 'https://localhost:7249/',
+                target: 'https://cardtraderapi.azurewebsites.net/',
                 secure: false
             }
         },

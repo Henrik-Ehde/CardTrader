@@ -54,8 +54,7 @@ function ListingDetails() {
     );
 
     async function GetListing(listingId: string) {
-        console.log('fetching Listings/' + listingId);
-        const response = await fetch('/listings/' + listingId);
+        const response = await fetch(import.meta.env.VITE_API_URL + 'listings/' + listingId);
 
 /*        For Debugging*/
         //console.log('awaiting data')

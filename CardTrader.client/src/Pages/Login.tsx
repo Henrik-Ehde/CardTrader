@@ -45,7 +45,7 @@ function Login() {
             else
                 loginurl = "/login?useSessionCookies=true";
 
-            fetch(loginurl, {
+            fetch(import.meta.env.VITE_API_URL+loginurl, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

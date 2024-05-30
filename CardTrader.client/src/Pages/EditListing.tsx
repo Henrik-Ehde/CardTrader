@@ -33,10 +33,8 @@ function EditListing() {
     const [quantity, setQuantity] = useState(1);
     const [price, setPrice] = useState(1);
     const navigate = useNavigate();
-    //const email = AuthorizedEmail();
     const [email, setEmail] = useState("")
 
-    // state variable for error messages
     const [error, setError] = useState("");
 
     const goBack = () => {
@@ -112,7 +110,7 @@ function EditListing() {
             }))
 
             // post data
-            fetch("/listings/" + listingId, {
+            fetch(import.meta.env.VITE_API_URL + "listings/" + listingId, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -209,14 +207,14 @@ function EditListing() {
     );
 
     async function GetCards() {
-        const response = await fetch('/cards');
+        const response = await fetch(import.meta.env.VITE_API_URL + 'cards');
         const data = await response.json();
         setCards(data);
     }
 
     async function GetListing(listingId: string) {
         console.log('fetching Listings/' + listingId);
-        const response = await fetch('/listings/' + listingId);
+        const response = await fetch(import.meta.env.VITE_API_URL + 'listings/' + listingId);
 
         /*        For Debugging*/
         //console.log('awaiting data')

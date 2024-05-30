@@ -1,21 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import ReturnButton from "../Components/ReturnButton";
 import { Button } from "react-bootstrap";
 
 
 function AddCard() {
-    // state variables for email and passwords
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
-    const navigate = useNavigate();
 
     // state variable for error messages
     const [error, setError] = useState("");
-
-    const handleReturnClick = () => {
-        navigate("/");
-    }
 
 
 
@@ -40,7 +33,7 @@ function AddCard() {
             // clear error message
             setError("");
             // post data
-            fetch("/cards", {
+            fetch(import.meta.env.VITE_API_URL + "cards", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -87,7 +80,6 @@ function AddCard() {
                 <div>
                     <label htmlFor="text">Card Text:</label></div><div>
                     <textarea
-                        //type="text"
                         id="text"
                         name="text"
                         value={text}

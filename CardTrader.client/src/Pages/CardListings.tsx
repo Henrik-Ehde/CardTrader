@@ -4,7 +4,6 @@ import CardDetails from '../Components/CardDetails';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import ReturnButton from '../Components/ReturnButton';
-import { AuthorizedName } from '../Components/LoggedInUser';
 import { LoggedIn } from '../Components/LoggedInUser';
 
 interface Card {
@@ -57,11 +56,12 @@ function CardListings() {
                 <tbody>
                     {card.listings.map(listing =>
                         <tr key={listing.id}>
-                            <td> <a href={`/BuyFromUser/${listing.user.name}`}> {listing.user.name} </a></td>
+{/*                            <td> <a href={`/#/BuyFromUser/${listing.user.name}`}> {listing.user.name} </a></td>*/}
+                            <td> <Link to={`/BuyFromUser/${listing.user.name}`}>  {listing.user.name} </Link> </td>
                             <td>{listing.price}</td>
                             <td>{listing.quantity}</td>
                             {loggedInUser == null
-                                ? <td> <Link to={`/Login`}> <Button variant="outline-secondary"> Login to trade</Button> </Link> </td>
+                                ? <td> <Link to='/Login'> <Button variant="outline-secondary"> Login to trade</Button> </Link> </td>
 
                                 : loggedInUser.name == listing.user.name
                                     ? <td>
@@ -70,25 +70,7 @@ function CardListings() {
                                     </td>
 
                                     : <td> <Link to={`/BuyFromUser/${listing.user.name}`}> <Button variant="success"> Buy Cards</Button> </Link> </td>
-
-                                
-
-                            }
-
-
-
-{/*                            {loggedInUser.name == listing.user.name ?*/}
-{/*/*                           {loggedInUser != null ?*/}
-{/*                                <  >*/}
-
-{/*                                </>*/}
-
-{/*                                : <>*/}
-
-{/*                                </>*/}
-{/*                            }                            */}
-                            
-
+                            }                
                         </tr>
                     )}
                 </tbody>
@@ -104,7 +86,7 @@ function CardListings() {
 
     async function GetCard(cardId: string) {
         console.log('fetching cards/' + cardId);
-        const response = await fetch('/cards/' + cardId);
+        const response = await fetch(import.meta.env.VITE_API_URL + 'cards/' + cardId);
 
         //For Debugging
         //console.log('awaiting data')

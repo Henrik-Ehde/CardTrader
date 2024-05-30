@@ -11,7 +11,19 @@ namespace CardTrader.Server
     {
         public static void Main(string[] args)
         {
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  policy =>
+                                  {
+                                      policy.WithOrigins("https://cardtrader.azurewebsites.net")
+                                      .AllowAnyHeader();
+                                  });
+            });
 
             var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
 
@@ -36,6 +48,9 @@ namespace CardTrader.Server
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            app.UseCors(MyAllowSpecificOrigins);
+
             app.MapIdentityApi<User>();
 
             app.MapPost("/logout", async (SignInManager<User> signInManager) =>
@@ -55,7 +70,7 @@ namespace CardTrader.Server
 
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();

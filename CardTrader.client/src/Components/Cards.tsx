@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../App.css';
-//import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface Card {
     id: number;
@@ -34,7 +34,7 @@ function Cards() {
     };
 
     const contents = cards === undefined
-        ? <p><em>Loading... </em></p>
+        ? <p><em>Loading... Please refresh the page after a minute if the content does not load. </em></p>
         : <>
             <input
                 type="text"
@@ -58,7 +58,7 @@ function Cards() {
                                 card.text.toLowerCase().includes(searchInput.toLowerCase())
                             ) &&
                             <tr key={card.id}>
-                                <td> <a href={`/Card/${card.id}`}> {card.title} </a></td>
+                                <td> <Link to={`/Card/${card.id}`}> {card.title} </Link></td>
                                 <td>{card.numberOfListings}</td>
                                 <td>{card.numberOfCards}</td>
                                 {card.bestPrice == 0
@@ -83,7 +83,8 @@ function Cards() {
     );
 
     async function GetCards() {
-        const response = await fetch('/cards');
+        //const response = await fetch('https://cardtraderapi.azurewebsites.net/cards');
+        const response = await fetch(import.meta.env.VITE_API_URL + 'cards');  
         const data = await response.json();
         setCards(data);
     }

@@ -4,11 +4,6 @@ import ListingDetails from '../Components/ListingDetails';
 import Button from 'react-bootstrap/Button';
 import ReturnButton from '../Components/ReturnButton';
 
-//interface Listing {
-//    id: number;
-//    title: string;
-//    text: string;
-//}
 function DeleteListing() {
     const { listingId } = useParams();
     const [error, setError] = useState<string>("");
@@ -20,7 +15,7 @@ function DeleteListing() {
 
     const handleDeleteClick = () => {
         // post data
-        fetch('/listings/' + listingId, {
+        fetch(import.meta.env.VITE_API_URL + 'listings/' + listingId, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -55,8 +50,6 @@ function DeleteListing() {
           <br />
           <span>
               <Button variant="danger" onClick={handleDeleteClick}> Delete</Button>{' '}
-
-{/*              <button onClick={goBack}>Return</button>*/}
               <ReturnButton />
           </span>
           {error && <p className="error">{error}</p>}

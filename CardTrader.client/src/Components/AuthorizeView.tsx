@@ -65,7 +65,7 @@ function AuthorizeView(props: { children: React.ReactNode }) {
         }
 
         // call the fetch function with retry logic
-        fetchWithRetry("/pingauth", {
+        fetchWithRetry(import.meta.env.VITE_API_URL + "pingauth", {
             method: "GET",
         })
             .catch((error) => {

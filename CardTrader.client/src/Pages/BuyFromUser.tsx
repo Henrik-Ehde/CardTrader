@@ -45,14 +45,6 @@ function UserListings() {
 
             else GetUser(userId);
         }
-
-        //if (loggedInUser.name != undefined) {
-        //    if (loggedInUser.name != userId) {
-
-        //        GetUser(userId);
-        //    }
-        //    else navigate("/mylistings");
-        //}
     }, [userId, loggedInUser]);
 
     const [listings, setListings] = useState([]);
@@ -131,7 +123,7 @@ function UserListings() {
             }))
 
             // post data
-            fetch("/orders", {
+            fetch(import.meta.env.VITE_API_URL + "orders", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -182,12 +174,12 @@ function UserListings() {
                 <tbody>
                     {listings.map(l =>
                         <tr key={l.id}>
-                            <td> <a href={`/Card/${l.card.id}`}> {l.card.title} </a></td>
+                            <td> <Link to={`/Card/${l.card.id}`}> {l.card.title} </Link></td>
                             <td>{l.price}</td>
                             <td>{l.quantity}</td>
 
                             {loggedInUser == null
-                                ? <td> <Link to={`/Login`}> <Button variant="outline-secondary"> Login to Buy</Button> </Link> </td>
+                                ? <td> <Link to={`/#/Login`}> <Button variant="outline-secondary"> Login to Buy</Button> </Link> </td>
 
                                 : <>
                                     <td>{l.buyQuantity > 0 &&
@@ -223,7 +215,7 @@ function UserListings() {
 
     async function GetUser(userId: string) {
         console.log('fetching User/' + userId);
-        const response = await fetch('/users/' + userId);
+        const response = await fetch(import.meta.env.VITE_API_URL + '/users/' + userId);
 
 ///*        For Debugging*/
 //        console.log('awaiting data')

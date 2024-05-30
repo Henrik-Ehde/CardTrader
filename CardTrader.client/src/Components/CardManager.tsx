@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../App.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import ReturnButton from './ReturnButton';
 
@@ -19,15 +19,11 @@ function CardManager() {
         GetCards();
     }, []);
 
-    const navigate = useNavigate();
-    const handleAddCardClick = () => {
-        navigate("/addCard");
-    }
-
     const contents = cards === undefined
         ? <p><em>Loading....</em></p>
         : <>
-            <button onClick={handleAddCardClick}>Add Card</button>
+            {/* <button onClick={handleAddCardClick}>Add Card</button> */}
+            <Link to='/AddCard'> <Button variant="outline-primary"> Add Card</Button> </Link>
             <table className="table table-striped" aria-labelledby="tabelLabel">
                 <thead>
                     <tr>
@@ -38,7 +34,7 @@ function CardManager() {
                 <tbody>
                     {cards.map(card =>
                         <tr key={card.id}>
-                            <td> <a href={`/Card/${card.id}`}> {card.title} </a></td>
+                            <td> <Link to={`/Card/${card.id}`}> {card.title} </Link></td>
                             <td>{card.text}</td>
                             <td> <Link to={`/EditCard/${card.id}`}> <Button variant="info"> Edit</Button> </Link> </td>
                             <td> <Link to={`/DeleteCard/${card.id}`}> <Button variant="warning"> Delete</Button> </Link> </td>

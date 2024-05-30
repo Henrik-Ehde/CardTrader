@@ -1,6 +1,6 @@
 import './App.css';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 import Home from './Pages/Home.tsx';
 import Login from './Pages/Login.tsx';
 import Register from './Pages/Register.tsx';
@@ -26,7 +26,7 @@ function App() {
         <>
             
 
-            <BrowserRouter>
+            <HashRouter>
                 <Header />
 
                 <Routes>
@@ -55,7 +55,7 @@ function App() {
                     
 
                 </Routes>
-            </BrowserRouter>
+            </HashRouter>
         </>
 
     );
